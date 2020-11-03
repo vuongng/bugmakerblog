@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: vuongng/bugmakerblog
+
+media_folder: content/assets
+public_folder: ../assets
+
+collections:
+  - name: blog
+    label: Blog
+    folder: content/{{year}}-{{month}}-{{day}}-{{slug}}
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "blog/{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+    - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
+    - {label: "Title", name: "title", widget: "string"}
+    - {label: "Publish Date", name: "date", widget: "datetime"}
+    - {label: "Body", name: "body", widget: "markdown"}
