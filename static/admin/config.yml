@@ -1,6 +1,7 @@
 backend:
   name: github
   repo: vuongng/bugmakerblog
+  branch: master
 
 media_folder: content/assets
 public_folder: ../assets
