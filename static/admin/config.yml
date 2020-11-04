@@ -9,7 +9,7 @@ public_folder: ../assets
 collections:
   - name: blog
     label: Blog
-    folder: content/{{year}}-{{month}}-{{day}}-{{slug}}
+    folder: "content/{{year}}-{{month}}-{{day}}-{{slug}}"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     path: "blog/{{year}}-{{month}}-{{day}}-{{slug}}"

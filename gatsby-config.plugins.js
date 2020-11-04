@@ -5,6 +5,7 @@ module.exports = [
   'gatsby-transformer-sharp',
   'gatsby-plugin-sharp',
   'gatsby-plugin-less',
+  'gatsby-plugin-netlify-cms',
   'gatsby-plugin-offline',
   {
     resolve: 'gatsby-source-filesystem',
