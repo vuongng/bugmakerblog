@@ -5,11 +5,11 @@ import style from './postCard.module.less';
 import Utils from '../../utils/pageUtils';
 
 const PostCard = (props) => {
-  const { data: { node: { frontmatter } } } = props;
+  const { data: { node: { frontmatter, fields } } } = props;
 
   return (
     <div className={style.postCard}>
-      <Link to={Utils.resolvePageUrl(frontmatter.path)}>
+      <Link to={Utils.resolvePageUrl(fields.slug)}>
         <div
           className={style.postCardImg}
           style={{

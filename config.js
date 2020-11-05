@@ -1,6 +1,6 @@
 module.exports = {
   pathPrefix: '',
-  siteUrl: 'https://rolwinreevan.com',
+  siteUrl: 'https://abugmaker.netlify.app',
   siteTitle: 'Rolwin Reevan',
   siteDescription: 'Logbook of a software developer',
   author: 'Rolwin Reevan',
@@ -69,6 +69,5 @@ module.exports = {
       description: 'A general purpose programming language that is widely used for developing various applications.',
       color: '#f9c646',
     },
-
   },
 };

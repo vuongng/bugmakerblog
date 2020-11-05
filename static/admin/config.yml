@@ -9,13 +9,15 @@ public_folder: ../assets
 collections:
   - name: blog
     label: Blog
-    folder: "content/{{year}}-{{month}}-{{day}}-{{slug}}"
+    folder: "content/"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    path: "blog/{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}/index"
+    path: "{{slug}}"
     fields:
     - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
     - {label: "Title", name: "title", widget: "string"}
     - {label: "Publish Date", name: "date", widget: "datetime"}
+    - {label: "Excerpt", name: "excerpt", widget: "hidden", default: ""}
     - {label: "Body", name: "body", widget: "markdown"}
-    - {label: "Tags", name: "tags", widget: "list"} 
+    - {label: "Tags", name: "tags", widget: "hidden", default: ["gatsby"]} 
+    - {label: "Cover Image", name: "cover", widget: image}

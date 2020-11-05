@@ -14,23 +14,24 @@ import './highlight-syntax.less';
 import style from './post.module.less';
 
 const Post = ({ data }) => {
-  const { html, frontmatter } = data.markdownRemark;
+  const { html, frontmatter, fields } = data.markdownRemark;
   const {
-    title, cover: { childImageSharp: { fluid } }, excerpt, path,
+    title, cover: { childImageSharp: { fluid } }, excerpt,
   } = frontmatter;
-
+  const { slug } = fields;
   const canonicalUrl = Utils.resolvePageUrl(
     Config.siteUrl,
     Config.pathPrefix,
-    path,
+    slug,
   );
+  // console.log(canonicalUrl);
   return (
     <Layout className="outerPadding">
       <Layout className="container">
         <SEO
           title={title}
           description={excerpt}
-          path={path}
+          path={slug}
           keywords={['Rolwin', 'Reevan', 'Monteiro', 'FullStack developer', 'Javascript', 'ReactJS', 'NodeJS', 'Gatsby', 'technology']}
         />
         <Header />
@@ -50,16 +51,16 @@ const Post = ({ data }) => {
 };
 
 export const pageQuery = graphql`
-  query($postPath: String!) {
-    markdownRemark(frontmatter: { path: { eq: $postPath } }) {
+  query($slug: String!) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       timeToRead
       frontmatter {
         title
         date(formatString: "DD MMM YYYY")
         tags
-        path
         excerpt
+        path
         cover {
           childImageSharp {
             fluid(maxWidth: 1000) {
@@ -68,20 +69,23 @@ export const pageQuery = graphql`
           }
         }
       }
+      fields {
+        slug
+      }
     }
     allMarkdownRemark(
       filter: {
-        frontmatter: { path: { ne: $postPath } }
+        fields: { slug: { ne: $slug } }
         fileAbsolutePath: { regex: "/index.md$/" }
       }
     ) {
       edges {
         node {
           frontmatter {
-            path
             title
             tags
             excerpt
+            path
             cover {
               childImageSharp {
                 fluid(maxWidth: 600) {
@@ -89,6 +93,9 @@ export const pageQuery = graphql`
                 }
               }
             }
+          }
+          fields {
+            slug
           }
         }
       }

@@ -27,7 +27,6 @@ function SEO({
   keywords,
   contentType,
   imageUrl,
-  translations,
   meta,
 }) {
   return (
@@ -41,7 +40,7 @@ function SEO({
           Config.siteUrl,
           Config.pathPrefix,
           path,
-        );
+        ).replace(/^\/|\/$/g, '');
         const metaImageUrl = Utils.resolveUrl(
           Config.siteUrl,
           imageUrl || data.file.childImageSharp.fixed.src,
@@ -77,21 +76,7 @@ function SEO({
             }
             link={[
               { rel: 'canonical', href: pageUrl }, // Canonical url
-            ]
-              // Translated versions of page
-              .concat(
-                translations
-                  ? translations.map((obj) => ({
-                    rel: 'alternate',
-                    hreflang: obj.hreflang,
-                    href: Utils.resolvePageUrl(
-                      Config.siteUrl,
-                      Config.pathPrefix,
-                      obj.path,
-                    ),
-                  }))
-                  : [],
-              )}
+            ]}
           />
         );
       }}
@@ -107,12 +92,6 @@ SEO.propTypes = {
   contentType: PropTypes.oneOf(['article', 'website']),
   imageUrl: PropTypes.string,
   keywords: PropTypes.arrayOf(PropTypes.string),
-  translations: PropTypes.arrayOf(
-    PropTypes.shape({
-      hreflang: PropTypes.string.isRequired,
-      path: PropTypes.string.isRequired,
-    }),
-  ),
   meta: PropTypes.arrayOf(
     PropTypes.shape({
       property: PropTypes.string.isRequired,
@@ -126,7 +105,6 @@ SEO.defaultProps = {
   contentType: 'website',
   imageUrl: null,
   keywords: [],
-  translations: [],
   meta: [],
 };
 
